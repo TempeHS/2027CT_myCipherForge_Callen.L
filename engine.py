@@ -20,31 +20,56 @@ RULES:
 
 
 # Your encryption code will go below this line!
-def simple_shift(text, shift):
+def phase1_encrypt(text, key):
     """
-    Shift every character by 'shift' positions.
+    Phase 1: Substitution — Shift every character by a fixed amount.
 
-    This is a simple Caesar cipher that works on ALL printable characters,
-    not just letters. It wraps around using modular arithmetic.
+    This layer changes WHAT each character is (its identity).
 
     Args:
-        text: The string to encrypt
-        shift: How many positions to shift (positive = forward)
+        text: The plaintext string to encrypt
+        key: Dictionary containing encryption settings
 
     Returns:
-        The encrypted string
+        The encrypted string with all characters shifted
     """
-    result = ""
+    # Get the shift amount from the key (default to 5 if not specified)
+    shift = key.get("shift", 5)
 
+    result = ""
     for char in text:
         if 32 <= ord(char) <= 126:  # Printable ASCII range
-            # Convert to 0-94 range
             position = ord(char) - 32
-            # Shift and wrap
             new_position = (position + shift) % 95
-            # Convert back to character
             result += chr(new_position + 32)
         else:
-            # Keep non-printable characters unchanged
             result += char
+
+    return result
+
+
+def phase1_decrypt(text, key):
+    """
+    Phase 1: Reverse the substitution.
+
+    Decryption shifts in the OPPOSITE direction (subtracts instead of adds).
+
+    Args:
+        text: The encrypted string
+        key: Dictionary containing the same encryption settings
+
+    Returns:
+        The decrypted (original) string
+    """
+    shift = key.get("shift", 5)
+
+    result = ""
+    for char in text:
+        if 32 <= ord(char) <= 126:
+            position = ord(char) - 32
+            new_position = (position - shift) % 95  # SUBTRACT to reverse!
+            result += chr(new_position + 32)
+        else:
+            result += char
+
     return result
