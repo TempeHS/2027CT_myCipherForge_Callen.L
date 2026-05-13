@@ -47,5 +47,4 @@ def simple_shift(text, shift):
         else:
             # Keep non-printable characters unchanged
             result += char
-
     return result
