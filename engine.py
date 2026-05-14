@@ -1,7 +1,7 @@
 """
 CipherForge — Encryption Engine
 ================================
-Author: [Your Name]
+Author: Callen Lin
 Date: 2026
 
 This file contains my custom 5-layer encryption algorithm.
@@ -249,6 +249,40 @@ def phase4_decrypt(text, key):
     return result
 
 
+# ==================== PHASE 5: BORON1 LEGENDARY WILDCARD ====================
+
+
+def phase5_encrypt(text, key):
+    previous_value = 0
+    text_sum = sum(ord(a) for a in text)
+
+    password_sum = text_sum + sum(ord(a) for a in key["password"])
+    result = ""
+
+    for i, char in enumerate(text):
+        mask = (previous_value + password_sum + i) % 256
+        ciphered_char = ord(char) ^ mask
+        result += chr(ciphered_char)
+        previous_value = ciphered_char
+    return chr(text_sum % 256) + result
+
+
+def phase5_decrypt(cipher_text, key):
+    previous_value = 0
+    text_sum = ord(cipher_text[0])
+    cipher_text = cipher_text[1:]
+
+    password_sum = text_sum + sum(ord(a) for a in key["password"])
+    result = ""
+
+    for i, cipher_char in enumerate(cipher_text):
+        mask = (previous_value + password_sum + i) % 256
+        plain_char = ord(cipher_char) ^ mask
+        result += chr(plain_char)
+        previous_value = ord(cipher_char)
+    return result
+
+
 # ==================== MASTER FUNCTIONS ====================
 
 
@@ -268,7 +302,8 @@ def encrypt(plaintext, key):
     # Phase 4: Noise injection (add decoy characters)
     result = phase4_encrypt(result, key)
 
-    # TODO: Phase 5 - Wild Card (your invention!)
+    # Phase 5 - Wild Card (your invention!)
+    result = phase5_encrypt(result, key)
 
     return result
 
@@ -279,7 +314,8 @@ def decrypt(ciphertext, key):
 
     # Decrypt in REVERSE order!
 
-    # TODO: Phase 5 - Wild Card (your invention!)
+    # Phase 5 - Wild Card (your invention!)
+    result = phase5_decrypt(result, key)
 
     # Phase 4: Remove noise characters
     result = phase4_decrypt(result, key)
