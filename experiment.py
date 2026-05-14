@@ -1,3 +1,4 @@
+import os
 from engine import (
     encrypt,
     decrypt,
@@ -16,7 +17,7 @@ key = {
     "noise_char": "~",
 }
 
-message = "The eagle lands at midnight"
+message = "bbbbbbbbb"
 
 # SELF-EXPERIMENTATION
 phase1_encrypted = phase1_encrypt(message, key)
@@ -32,7 +33,7 @@ phase4_encrypted = phase4_encrypt(phase3_encrypted, key)
 print(f"Phase 4 Encrypt: {phase4_encrypted}")
 
 phase5_encrypted = phase5_encrypt(phase4_encrypted, key)
-print(f"Phase 5 Encrypt: {phase5_encrypted}")
+print(f"Phase 5 Encrypt: {repr(phase5_encrypted)}")
 
 decrypted = decrypt(phase5_encrypted, key)
 print(f"Decryption: {decrypted}")

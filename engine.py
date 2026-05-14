@@ -212,7 +212,9 @@ def phase3_decrypt(text, key):
 
 
 def phase4_encrypt(text, key):
-    """Insert noise character every N positions."""
+    """
+    Phase 4: Insert noise character every N positions.
+    """
     interval = key.get("noise_interval", 3)
     noise = key.get("noise_char", "~")
 
@@ -249,16 +251,32 @@ def phase4_decrypt(text, key):
     return result
 
 
-# ==================== PHASE 5: BORON1 LEGENDARY WILDCARD ====================
+# ==================== PHASE 5: BORON1 XOR WILDCARD ====================
 
 
 def phase5_encrypt(text, key):
-    previous_value = 0
+    """
+    Phase 5: Custom XOR Encryption
+
+    How it completes it:
+    1. collects a value from the plain text
+    2. collects another value from encryption
+    3. generates a different mask for each number
+    4. XOR each character with that different mask
+    5. makes a chain from previous mask
+    """
+    result = ""
+    previous_value = 0  # Initialize the chain
+
+    # Add all the values together from encryption 4
     text_sum = sum(ord(a) for a in text)
 
-    password_sum = text_sum + sum(ord(a) for a in key["password"])
-    result = ""
+    # Use password's individual character growing exponentially
+    password_sum = text_sum + sum(
+        ord(c) ** (i + 1) for i, c in enumerate(key["password"])
+    )
 
+    # Loop through each character to encrypt
     for i, char in enumerate(text):
         mask = (previous_value + password_sum + i) % 256
         ciphered_char = ord(char) ^ mask
@@ -268,11 +286,14 @@ def phase5_encrypt(text, key):
 
 
 def phase5_decrypt(cipher_text, key):
+    """Reversing the XOR through going backwards"""
     previous_value = 0
     text_sum = ord(cipher_text[0])
     cipher_text = cipher_text[1:]
 
-    password_sum = text_sum + sum(ord(a) for a in key["password"])
+    password_sum = text_sum + sum(
+        ord(c) ** (i + 1) for i, c in enumerate(key["password"])
+    )
     result = ""
 
     for i, cipher_char in enumerate(cipher_text):
@@ -311,7 +332,6 @@ def encrypt(plaintext, key):
 def decrypt(ciphertext, key):
     """Reverse all encryption phases."""
     result = ciphertext
-
     # Decrypt in REVERSE order!
 
     # Phase 5 - Wild Card (your invention!)
