@@ -208,7 +208,7 @@ def phase3_decrypt(text, key):
     return result
 
 
-# ==================== PHASE 3: PASSWORD-DEPENDENT ====================
+# ==================== PHASE 4: NOISE INJECTION ====================
 
 
 def phase4_encrypt(text, key):
