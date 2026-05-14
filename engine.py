@@ -279,11 +279,11 @@ def phase5_encrypt(text, key):
 
     # Loop through each character to encrypt
     for i, char in enumerate(text):
-        mask = (previous_value + password_sum + i) % 256
+        mask = (previous_value + password_sum + i) % 95
         ciphered_char = ord(char) ^ mask
         result += chr(ciphered_char)
         previous_value = ciphered_char
-    return chr(text_sum % 256) + result
+    return chr(text_sum % 95) + result
 
 
 def phase5_decrypt(cipher_text, key):
@@ -298,7 +298,7 @@ def phase5_decrypt(cipher_text, key):
     result = ""
 
     for i, cipher_char in enumerate(cipher_text):
-        mask = (previous_value + password_sum + i) % 256
+        mask = (previous_value + password_sum + i) % 95
         plain_char = ord(cipher_char) ^ mask
         result += chr(plain_char)
         previous_value = ord(cipher_char)

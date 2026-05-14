@@ -17,7 +17,7 @@ key = {
     "noise_char": "~",
 }
 
-message = "YoLookAtMyAmazingPasswordThatIsReallyDamnOp123!!"
+message = "www"
 
 # SELF-EXPERIMENTATION
 phase1_encrypted = phase1_encrypt(message, key)
