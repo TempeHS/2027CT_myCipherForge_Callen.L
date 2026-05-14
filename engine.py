@@ -259,12 +259,13 @@ def phase5_encrypt(text, key):
     Phase 5: Custom XOR Encryption
 
     How it completes it:
-    1. collects a value from the plain text
-    2. collects another value from encryption
-    3. generates a different mask for each number
-    4. XOR each character with that different mask
-    5. makes a chain from previous mask
+    1. Adds up all the text into 1 number
+    2. Adds up the password into a exponential value (through turning into ASCII)
+    3. Begin a avalanche effect making a mask for each character
+    4. Encrypt each with XOR
+    5. Update the chain to continue making XOR less predictable
     """
+
     result = ""
     previous_value = 0  # Initialize the chain
 
