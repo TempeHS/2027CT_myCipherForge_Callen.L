@@ -1,31 +1,20 @@
 from engine import encrypt, decrypt
-from engine import phase1_encrypt, phase2_encrypt, phase3_encrypt
 
-# Key with all settings
 key = {
-    "shift": 7,  # Phase 1
-    "block_size": 4,  # Phase 2
-    "password": "FORGE",  # Phase 3
+    "shift": 5,
+    "block_size": 4,
+    "password": "CIPHER",
+    "noise_interval": 3,
+    "noise_char": "~",
 }
 
-message = "CipherForge 2026!"
+message = "The eagle lands at midnight"
+print(f"Original:  {message}")
 
-# Watch each phase transform the message
-print(f"Original:       {message}")
-
-after_p1 = phase1_encrypt(message, key)
-print(f"After Phase 1:  {after_p1}")
-
-after_p2 = phase2_encrypt(after_p1, key)
-print(f"After Phase 2:  {after_p2}")
-
-after_p3 = phase3_encrypt(after_p2, key)
-print(f"After Phase 3:  {after_p3}")
-
-# Full encrypt/decrypt
 encrypted = encrypt(message, key)
-decrypted = decrypt(encrypted, key)
+print(f"Encrypted: {encrypted}")
 
-print(f"\nFull encrypt: {encrypted}")
-print(f"Decrypted:    {decrypted}")
-print(f"Success: {decrypted == message}")
+decrypted = decrypt(encrypted, key)
+print(f"Decrypted: {decrypted}")
+
+print(f"\nMatch: {message == decrypted}")
