@@ -25,16 +25,28 @@ This project implements a multi-layered encryption system that I designed from s
 > This is not a cryptographically safe algorithm, and should not be used in any sensitive data. For encrypting data, you should use Advanced Encryption Standard (AES) or Bcrypt and etc.
 
 Step 1. Creating the environment
-`python3 -m venv venv`
+
+```
+python3 -m venv venv
+```
 
 Step 2. Launching the environment
-`source venv/bin/active`
+
+```
+source venv/bin/active
+```
 
 Step 3. Installing the dependencies
-`pip install -r requirements.txt`
+
+```
+pip install -r requirements.txt
+```
 
 Step 4. Launching the program
-`python3 app.py`
+
+```
+python3 app.py
+```
 
 ## Help
 
