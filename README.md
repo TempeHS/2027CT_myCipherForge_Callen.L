@@ -1,4 +1,4 @@
-# 🔐 CipherForge
+# 🔐 CipherForge: Boron1 Encryption Algorithm
 
 **A custom 5-layer encryption algorithm** built as part of Year 9 Digital Technologies.
 
@@ -7,6 +7,9 @@
 This project implements a multi-layered encryption system that I designed from scratch. Each layer adds a different type of protection, similar to how real encryption algorithms like AES work.
 
 ## Algorithm Phases
+
+> [!NOTE]
+> You can find more information about algorithms in engine.py, and you can see each algorithm at work in experiment.py.
 
 | Phase | Name            | Status       |
 | ----- | --------------- | ------------ |
@@ -17,6 +20,21 @@ This project implements a multi-layered encryption system that I designed from s
 | 5     | Wild Card       | ✅ Completed |
 
 ## Running the Project
+
+> [!CAUTION]
+> This is not a cryptographically safe algorithm, and should not be used in any sensitive data. For encrypting data, you should use Advanced Encryption Standard (AES) or Bcrypt and etc.
+
+Step 1. Creating the environment
+`python3 -m venv venv`
+
+Step 2. Launching the environment
+`source venv/bin/active`
+
+Step 3. Installing the dependencies
+`pip install -r requirements.txt`
+
+Step 4. Launching the program
+`python3 app.py`
 
 ## Help
 
@@ -48,7 +66,7 @@ NOT AVAILABLE AT THE MOMENT
 
 ## License
 
-This project is licensed under The MIT License - see the LICENSE.md file for details
+This project is licensed under The GNU GPLv3 License - see the LICENSE.md file for details
 
 ## Acknowledgments
 
