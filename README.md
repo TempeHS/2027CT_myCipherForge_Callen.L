@@ -33,7 +33,7 @@ python3 -m venv venv
 Step 2. Launching the environment
 
 ```
-source venv/bin/active
+source venv/bin/activate
 ```
 
 Step 3. Installing the dependencies
